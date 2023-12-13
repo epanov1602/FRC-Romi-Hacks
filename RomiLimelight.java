@@ -1,7 +1,5 @@
 package frc.robot.sensors;
 
-import frc.robot.Constants;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -14,9 +12,7 @@ import java.net.UnknownHostException;
 import java.io.IOException;
  
 /**
- * This program demonstrates a simple TCP/IP socket client.
- *
- * @author www.codejava.net
+ * Limelight camera sensor for FRC Romi
  */ 
 
 public class RomiLimelight {
