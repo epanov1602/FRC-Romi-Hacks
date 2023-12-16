@@ -19,17 +19,21 @@ public class RomiLimelight {
   public static final int LimelightNTRegistrationPort = 5899;
 
   protected NetworkTable m_table;
-  private NetworkTableEntry m_tx, m_ty, m_ta;
+  private NetworkTableEntry m_tx, m_ty, m_ta, m_pipeline;
 
   public double getX() { return m_tx.getDouble(Double.NaN); }
   public double getY() { return m_ty.getDouble(Double.NaN); }
   public double getA() { return m_ta.getDouble(Double.NaN); }
+
+  public int getPipeline() { return (int)m_pipeline.getDouble(-1); }
+  public void setPipeline(int pipeline) { m_pipeline.setDouble(pipeline); }
 
   /** Create a new RomiLimelight. */
   public RomiLimelight() {
     registerForNetworkTables();
 
     m_table = NetworkTableInstance.getDefault().getTable("limelight");
+    m_pipeline = m_table.getEntry("pipeline");
     m_tx = m_table.getEntry("tx");
     m_ty = m_table.getEntry("ty");
     m_ta = m_table.getEntry("ta");
@@ -49,7 +53,7 @@ public class RomiLimelight {
         System.err.println(response);
         while ((response = reader.readLine()) != null)
             System.err.println(response);
-        throw new java.net.ProtocolException("Failed to setup forwarding on the Pi for Limelight NetworkTables traffic");           
+        throw new ProtocolException("Failed to setup forwarding on the Pi for Limelight NetworkTables traffic");           
     } catch (UnknownHostException ex) {
         System.err.println("Server not found in RomiLimelight::registerForNetworkTables: " + ex.getMessage()); 
     } catch (IOException ex) {
